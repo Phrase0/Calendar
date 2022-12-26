@@ -62,7 +62,6 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         let dateComponents = DateComponents(year:currentYear, month: currentMonth)
         let date = Calendar.current.date(from: dateComponents)!
         //取得第一天是星期幾
-        
         return Calendar.current.component(.weekday, from: date)
     }
     
@@ -118,6 +117,20 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
+    //選到日期會變顏色
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell:UICollectionViewCell = calendar.cellForItem(at: indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor(red: 226/255, green: 149/255, blue: 135/255, alpha: 0.7)
+        //導圓角
+        selectedCell.layer.cornerRadius = selectedCell.frame.size.height/2
+        selectedCell.clipsToBounds = true
+        
+    }
+    //取消選取
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cellToDeselect:UICollectionViewCell = calendar.cellForItem(at: indexPath)!
+        cellToDeselect.contentView.backgroundColor = UIColor.clear
+        }
     
     
     
@@ -137,9 +150,6 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         let width = collectionView.frame.width/7
         return CGSize(width: width, height: 40)
     }
-    
-    
-
 
     
     //解決轉向時會跑版的問題
