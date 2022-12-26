@@ -49,13 +49,17 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
     //這種寫法叫computed property，可以計算出來的屬性
     var numberOfDaysInThisMonth:Int{
         let dateComponents = DateComponents(year:currentYear, month: currentMonth)
-        let date = Calendar.current.date(from: dateComponents)!
-            //設定range
-        let range = Calendar.current.range(of: .day, in: .month, for: date)
-        //有值則回傳range，無值回傳0
-        return range?.count ?? 0
-
+        
+        guard let date = Calendar.current.date(from: dateComponents) else {
+            //無值回傳0
+            return 0
+        }
+                    //設定range
+                let range = Calendar.current.range(of: .day, in: .month, for: date)
+                    //有值則回傳range，無值回傳0
+                return range?.count ?? 0
     }
+        
     
     //確認每個月第一天是星期幾
     var whatDayIsIt:Int{
