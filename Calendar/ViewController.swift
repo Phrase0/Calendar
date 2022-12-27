@@ -36,8 +36,9 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
     }
     
     
-    //顯示年份
+    
     //呼叫手機內內建的日曆實體Calendar類別(不需初始化)
+    //顯示年份
     var currentYear = Calendar.current.component(.year, from: Date())
     //顯示月份
     var currentMonth = Calendar.current.component(.month, from: Date())
@@ -88,6 +89,7 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
     func setUp() {
         timeLabel.text = months[currentMonth-1] + String( currentYear)
         calendar.reloadData()
+        
         print(whatDayIsIt)
         
     }
@@ -106,7 +108,7 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         //看是否有可回收的collectionViewCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        //設定顯示的文字(因collectionView無法跟tableCiew一樣用textLabel顯示文字)
+        //設定顯示的文字(因collectionView無法跟tableView一樣用textLabel顯示文字)
         //subviews:找到contentView的所有物件
         if let textLabel = cell.contentView.subviews[0] as? UILabel{
             //顯示空格
